@@ -1,9 +1,32 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
+use App\Models\Post;
+
 class PostController extends Controller
 {
+    public function index()
+    {
+        $posts = Post::all();
+        return view('posts.index', ['posts' => $posts]);
+    }
+
+    public function show(Post $post)
+    {
+        $posts = Post::all();
+        return view('posts.show', ['posts' => $posts]);
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return response()->json(['message' => 'Post deleted successfully']);
+    }
+
     public function create()
     {
         if (Gate::allows('isAuthor')) {
