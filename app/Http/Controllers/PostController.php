@@ -22,10 +22,10 @@ class PostController extends Controller
     }
     public function delete()
     {
-        if (Gate::allows('isAdmin')) {
-            dd('Admin allowed');
+        if (Gate::allows('isAdmin') || Gate::allows('isAuthor')) {
+            dd('Admin and Author allowed');
         } else {
-            dd('You are not Admin');
+            dd('You are not Admin and Author');
         }
     }
 }
