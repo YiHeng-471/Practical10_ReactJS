@@ -12,7 +12,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        @can('isAdmin')
+                        @can('isAdmin') {{-- Using can to gate content based on user role --}}
                             <div class="btn btn-success btn-lg">
                                 You have Admin Access
                             </div>
