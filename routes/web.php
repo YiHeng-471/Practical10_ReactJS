@@ -6,9 +6,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PostController;
 
-Route::get('/posts/create', [PostController::class, 'create']);
-Route::get('/posts/edit', [PostController::class, 'edit']);
-Route::get('/posts/delete', [PostController::class, 'delete']);
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('can:isAuthor');
+Route::get('/posts/edit', [PostController::class, 'edit'])->middleware('can:isAuthor');
+Route::get('/posts/delete', [PostController::class, 'delete'])->middleware('can:isAdmin');
 
 Route::view('/', 'welcome');
 Auth::routes();
