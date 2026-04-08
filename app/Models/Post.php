@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $fillable = [
+        'title',
+        'content',
+        'user_id'
+    ];
 }
