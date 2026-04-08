@@ -7,9 +7,9 @@ export default class Example extends Component {
         super()
         this.state = {
             posts: [], //response of API into post state
-            newPostModal: false,            
-            newPostData: { title: "", content: "", user_id: "" },
+            newPostModal: false,
             updatePostModal: false,
+            newPostData: { title: "", content: "", user_id: "" },
             updatePostData: { id:"", title: "", content:"", user_id:"" }
         }
     }
@@ -22,7 +22,8 @@ export default class Example extends Component {
     }
 
     addPost() {
-        axios.post('http://127.0.0.1:8000/api/post', this.state.newPostData).then((response) => {
+        axios.post('http://127.0.0.1:8000/api/post', 
+        this.state.newPostData).then((response) => {
             let { posts } = this.state
             this.loadPost()
             this.setState({
@@ -52,7 +53,7 @@ export default class Example extends Component {
     }
     
     updatePost() {
-        let {  title, content, user_id } = this.state.updatePostData
+        let { id, title, content, user_id } = this.state.updatePostData
         axios.put('http://127.0.0.1:8000/api/post/' + this.state.updatePostData.id, {
             title, content, user_id
         }).then((response) => {
@@ -63,7 +64,17 @@ export default class Example extends Component {
             })
         })
     }
+    deletePost(id) {
+        
+        if (confirm("Do you want delete this Post?"))
+        {
+        axios.delete('http://127.0.0.1:8000/api/post/' + id, {
 
+        }).then((response) => {
+            this.loadPost()            
+        })
+    }
+    }
     toggleUpdatePostModal() {
         this.setState({
             updatePostModal: !this.state.updatePostModal
@@ -80,7 +91,7 @@ export default class Example extends Component {
                         <Button color="success" size="sm" className="mr-2"
                             onClick={this.callUpdatePost.bind(this,post.id, post.title, post.content, post.user_id)}>
                             Edit </Button>
-                        <Button color="danger" size="sm" className="mr-2"> Delete </Button>
+                        <Button color="danger" size="sm" className="mr-2"  onClick={this.deletePost.bind(this,post.id)}> Delete </Button>
                     </td>
                 </tr>
             )
@@ -136,7 +147,7 @@ export default class Example extends Component {
                 </Modal>
               
                 <Modal isOpen={this.state.updatePostModal} toggle={this.toggleUpdatePostModal.bind(this)}>
-                    <ModalHeader toggle={this.toggleUpdatePostModal.bind(this)}> Update Post
+                    <ModalHeader toggle={this.toggleUpdatePostModal.bind(this)}>Upadate Post
                     </ModalHeader>
                     <ModalBody>
                         <FormGroup>
@@ -203,4 +214,3 @@ export default class Example extends Component {
 if (document.getElementById('example')) {
     ReactDOM.render(<Example />, document.getElementById('example'));
 }
-

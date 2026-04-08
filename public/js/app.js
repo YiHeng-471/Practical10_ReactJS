@@ -5179,12 +5179,12 @@ var Example = /*#__PURE__*/function (_Component) {
       posts: [],
       //response of API into post state
       newPostModal: false,
+      updatePostModal: false,
       newPostData: {
         title: "",
         content: "",
         user_id: ""
       },
-      updatePostModal: false,
       updatePostData: {
         id: "",
         title: "",
@@ -5253,6 +5253,7 @@ var Example = /*#__PURE__*/function (_Component) {
     value: function updatePost() {
       var _this4 = this;
       var _this$state$updatePos = this.state.updatePostData,
+        id = _this$state$updatePos.id,
         title = _this$state$updatePos.title,
         content = _this$state$updatePos.content,
         user_id = _this$state$updatePos.user_id;
@@ -5275,6 +5276,16 @@ var Example = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "deletePost",
+    value: function deletePost(id) {
+      var _this5 = this;
+      if (confirm("Do you want delete this Post?")) {
+        axios__WEBPACK_IMPORTED_MODULE_11___default()["delete"]('http://127.0.0.1:8000/api/post/' + id, {}).then(function (response) {
+          _this5.loadPost();
+        });
+      }
+    }
+  }, {
     key: "toggleUpdatePostModal",
     value: function toggleUpdatePostModal() {
       this.setState({
@@ -5284,7 +5295,7 @@ var Example = /*#__PURE__*/function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
       var posts = this.state.posts.map(function (post) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)("tr", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)("td", {
@@ -5298,12 +5309,13 @@ var Example = /*#__PURE__*/function (_Component) {
               color: "success",
               size: "sm",
               className: "mr-2",
-              onClick: _this5.callUpdatePost.bind(_this5, post.id, post.title, post.content, post.user_id),
+              onClick: _this6.callUpdatePost.bind(_this6, post.id, post.title, post.content, post.user_id),
               children: "Edit "
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
               color: "danger",
               size: "sm",
               className: "mr-2",
+              onClick: _this6.deletePost.bind(_this6, post.id),
               children: " Delete "
             })]
           })]
@@ -5330,9 +5342,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "title",
                 value: this.state.newPostData.title,
                 onChange: function onChange(e) {
-                  var newPostData = _this5.state.newPostData;
+                  var newPostData = _this6.state.newPostData;
                   newPostData.title = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     newPostData: newPostData
                   });
                 }
@@ -5345,9 +5357,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "content",
                 value: this.state.newPostData.content,
                 onChange: function onChange(e) {
-                  var newPostData = _this5.state.newPostData;
+                  var newPostData = _this6.state.newPostData;
                   newPostData.content = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     newPostData: newPostData
                   });
                 }
@@ -5360,9 +5372,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "user_id",
                 value: this.state.newPostData.user_id,
                 onChange: function onChange(e) {
-                  var newPostData = _this5.state.newPostData;
+                  var newPostData = _this6.state.newPostData;
                   newPostData.user_id = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     newPostData: newPostData
                   });
                 }
@@ -5384,7 +5396,7 @@ var Example = /*#__PURE__*/function (_Component) {
           toggle: this.toggleUpdatePostModal.bind(this),
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
             toggle: this.toggleUpdatePostModal.bind(this),
-            children: " Update Post"
+            children: "Upadate Post"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_12__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_10__["default"], {
@@ -5394,9 +5406,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "title",
                 value: this.state.updatePostData.title,
                 onChange: function onChange(e) {
-                  var updatePostData = _this5.state.updatePostData;
+                  var updatePostData = _this6.state.updatePostData;
                   updatePostData.title = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     updatePostData: updatePostData
                   });
                 }
@@ -5409,9 +5421,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "content",
                 value: this.state.updatePostData.content,
                 onChange: function onChange(e) {
-                  var updatePostData = _this5.state.updatePostData;
+                  var updatePostData = _this6.state.updatePostData;
                   updatePostData.content = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     updatePostData: updatePostData
                   });
                 }
@@ -5424,9 +5436,9 @@ var Example = /*#__PURE__*/function (_Component) {
                 id: "user_id",
                 value: this.state.updatePostData.user_id,
                 onChange: function onChange(e) {
-                  var updatePostData = _this5.state.updatePostData;
+                  var updatePostData = _this6.state.updatePostData;
                   updatePostData.user_id = e.target.value;
-                  _this5.setState({
+                  _this6.setState({
                     updatePostData: updatePostData
                   });
                 }
