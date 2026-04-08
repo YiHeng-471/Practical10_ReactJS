@@ -32,6 +32,7 @@
 
     </div>
     <div id="example"></div>
+    <div id="test"></div>
 </body>
 <script src="/js/app.js"></script>
 </html>
