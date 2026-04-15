@@ -31,8 +31,11 @@
         @endif
 
     </div>
-    <div id="example"></div>
-    <div id="test"></div>
+    <div id="example"></div> 
+    <br>
+    <div id="test"></div> 
+    <br>
+    <div id="examples"></div>
 </body>
 <script src="/js/app.js"></script>
 </html>

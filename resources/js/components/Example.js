@@ -64,22 +64,23 @@ export default class Example extends Component {
             })
         })
     }
+
     deletePost(id) {
         
-        if (confirm("Do you want delete this Post?"))
-        {
-        axios.delete('http://127.0.0.1:8000/api/post/' + id, {
-
+        if (confirm("Do you want delete this Post?")) {
+            axios.delete('http://127.0.0.1:8000/api/post/' + id, {
         }).then((response) => {
-            this.loadPost()            
-        })
+                this.loadPost()            
+            })
+        }
     }
-    }
+
     toggleUpdatePostModal() {
         this.setState({
             updatePostModal: !this.state.updatePostModal
         })
     }
+
     render() {
         let posts = this.state.posts.map((post) => {
             return (
